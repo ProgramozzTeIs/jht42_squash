@@ -11,6 +11,8 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import pti.sb_squash_mvc.model.User;
+
 public class Database {
 
 	private SessionFactory sessionFactory;
@@ -25,30 +27,33 @@ public class Database {
 	}
 	
 	
-	public boolean userExists(String newName) {
+	public User userExists(String name, String pw) {
 		
-		boolean result = false;
+		Boolean result = false;
+		User currentUser = null;
 		
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.beginTransaction();
 		
-		Query query = session.createNativeQuery("SELECT * FROM users");
-		List<Object[]> rows = query.getResultList();
+		Query query = session.createQuery("SELECT u FROM User u");
+		List<User> users = query.getResultList();
 		
-		for(int i = 0; i < rows.size(); i++) {
+
+		for(int i = 0; i < users.size(); i++) {
+		
+			currentUser = users.get(i);
 			
-			String existingUsername = rows.get(i)[1].toString();
-			if(newName.equals(existingUsername)) {
-				result = true;
+			if( (name.equals(currentUser.getName())) && (pw.equals(currentUser.getPwd())) ) {
 				
+				currentUser.setLoggedin(true); // nem biztos, hogy ez így jó, de máshogy nem tudom jelölni, hogy mi van ha jó a name+pw páros és mi van ha nem
 			}
-	
 		}
+	
 		
 		tr.commit();
 		session.close();
 		
-		return result;
+		return currentUser;
 	}
 
 
