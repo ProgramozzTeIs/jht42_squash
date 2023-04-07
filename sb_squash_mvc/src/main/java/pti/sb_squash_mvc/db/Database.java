@@ -29,7 +29,6 @@ public class Database {
 	
 	public User userExists(String name, String pw) {
 		
-		Boolean result = false;
 		User currentUser = null;
 		
 		Session session = sessionFactory.openSession();
@@ -41,11 +40,11 @@ public class Database {
 
 		for(int i = 0; i < users.size(); i++) {
 		
-			currentUser = users.get(i);
 			
-			if( (name.equals(currentUser.getName())) && (pw.equals(currentUser.getPwd())) ) {
+			
+			if( (name.equals(users.get(i).getName())) && (pw.equals(users.get(i).getPwd())) ) {
 				
-				currentUser.setLoggedin(true); // nem biztos, hogy ez így jó, de máshogy nem tudom jelölni, hogy mi van ha jó a name+pw páros és mi van ha nem
+				currentUser = users.get(i);
 			}
 		}
 	
