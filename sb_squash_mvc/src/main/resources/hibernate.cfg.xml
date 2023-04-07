@@ -2,14 +2,15 @@
 <hibernate-configuration>
 	<session-factory> <!-- Database connection settings -->
 		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/squashdb</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/squash_db</property>
 		<property name="connection.username">root</property>
 		<property name="connection.password">root</property>
 		
 		
-		<mapping class="pti.sb_squash_mvc.model.User" />
 		<mapping class="pti.sb_squash_mvc.model.Court" />
 		<mapping class="pti.sb_squash_mvc.model.Match" />
-
+		<mapping class="pti.sb_squash_mvc.model.Roles" />
+		<mapping class="pti.sb_squash_mvc.model.User" />
+	
 	</session-factory>
 </hibernate-configuration>
