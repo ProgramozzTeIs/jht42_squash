@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th> 
+                    <th>Player1 name</th>
+                    <th>Player2 name</th>                  
+                    <th>Player1 score</th>                  
+                    <th>Player2 score</th>                  
+                    <th>Court</th>                  
+                    <th>Date</th>                  
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="text-align: center" th:each ="match : ${matchList}">
+                    <td th:text ="${match.id}"></td>
+                    <td th:text="${match.player1.name()}"></td>
+                    <td th:text="${match.player2.name}"/></td>
+                    <td th:text="${match.scorePlayer1}"/></td>
+                    <td th:text="${match.scorePlayer2}"/></td>
+                    <td th:text="${match.court.name}"/></td>
+                    <td th:text="${match.date}"/></td>
+                </tr>
+            </tbody>
+        </table> 
+    </body>
+</html>
