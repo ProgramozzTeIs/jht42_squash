@@ -42,24 +42,12 @@ public class AppController {
             } else {
                 List<Match> matchList= db.getAllMatches();
                 
-                for (int index = 0; index < matchList.size(); index++) {
-                    
-                    int player1Id = matchList.get(index).getPlayer1Id();
-                    int player2Id = matchList.get(index).getPlayer2Id();
-                    int courtId = matchList.get(index).getCourtId();
-                    
-                    Match currentMatch = matchList.get(index);
-                    
-                    currentMatch.setPlayer1(db.getUserById(player1Id));
-                    currentMatch.setPlayer2(db.getUserById(player2Id));
-                    currentMatch.setCourt(db.getCourtById(courtId));
-                    
-                }
-                
                 returnPage = "index.html";
                 model.addAttribute("matchList", matchList);
             }
         }
+        
+        db.closeDb();
         
         return returnPage;
     }
