@@ -25,7 +25,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <tbody>
                 <tr style="text-align: center" th:each ="match : ${matchList}">
                     <td th:text ="${match.id}"></td>
-                    <td th:text="${match.player1.name()}"></td>
+                    <td th:text="${match.player1.name}"></td>
                     <td th:text="${match.player2.name}"/></td>
                     <td th:text="${match.scorePlayer1}"/></td>
                     <td th:text="${match.scorePlayer2}"/></td>
