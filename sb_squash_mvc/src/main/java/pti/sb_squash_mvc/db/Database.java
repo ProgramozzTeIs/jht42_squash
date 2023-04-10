@@ -90,21 +90,33 @@ public class Database {
 		sessionFactory.close();
 	}
 
-    public List<Game> getAllMatches() {
+    public List<Game> getAllGames() {
        
-    	List<Game> matchs = null;
+    	Game game = null;
+    	List<Game> games = null;
     	
     	Session session = sessionFactory.openSession();
     	Transaction tx = session.beginTransaction();
     	
-    	Query query = session.createQuery("Select m From Match m");
-    	matchs = query.getResultList();
+    	Query query = session.createQuery("SELECT g FROM Game g ORDER BY g.gamedate");
+    	games = query.getResultList();
+    	
+    	for (int index = 0; games.size() <0 ; index++) {
+    		
+    		User user = getUserById(game.getPlayer1Id());
+    		game.setPlayer1(user);
+    		user = getUserById(game.getPlayer2Id());
+    		game.setPlayer2(user);
+    		Court court =getCourtById(game.getCourtId());
+    		game.setCourt(court);
+    	}
+    	
     	
     	tx.commit();
     	session.close();
     	
         
-        return matchs;
+        return games;
     }
     
 
