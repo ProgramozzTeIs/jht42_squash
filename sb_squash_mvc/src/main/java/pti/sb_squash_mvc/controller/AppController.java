@@ -65,6 +65,7 @@ public class AppController {
     	msg = "Password was changed.";
     	db.closeDb();
     	
+    	model.addAttribute("uid", uId);
     	model.addAttribute("message", msg);
     	
     	return "index.html";
