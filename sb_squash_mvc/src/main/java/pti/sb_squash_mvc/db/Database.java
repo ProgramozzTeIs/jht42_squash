@@ -91,7 +91,21 @@ public class Database {
 	}
 
     public List<Match> getAllMatches() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       
+    	List<Match> matchs = null;
+    	
+    	Session session = sessionFactory.openSession();
+    	Transaction tx = session.beginTransaction();
+    	
+    	Query query = session.createQuery("Select m From Match m");
+    	matchs = query.getResultList();
+    	
+    	tx.commit();
+    	session.close();
+    	
+        
+        return matchs;
     }
+    
 
 }
