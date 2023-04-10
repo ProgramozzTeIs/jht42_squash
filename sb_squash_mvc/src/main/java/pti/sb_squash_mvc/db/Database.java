@@ -83,6 +83,23 @@ public class Database {
 				
 		return court;
 	}
+	
+	public void pwdChange(int uId, String pwd) {
+		
+		User user = getUserById(uId);
+		user.setPwd(pwd);
+		user.setNewuser(false);
+		user.setLoggedin(true);
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		session.update(user);
+		
+		tx.commit();
+		session.close();
+		
+	}
 
 	
 	public void closeDb() {
@@ -106,6 +123,9 @@ public class Database {
         
         return matchs;
     }
+
+
+	
     
 
 }

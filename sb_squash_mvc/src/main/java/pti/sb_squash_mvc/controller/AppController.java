@@ -52,5 +52,23 @@ public class AppController {
         return returnPage;
     }
     
+    @PostMapping("/index")
+    public String changepwd(
+    		Model model,
+    		@RequestParam(name = "uid") int uId,
+    		@RequestParam(name = "password") String pwd
+    		) {
+    	String msg = "";
+    	Database db = new Database();
+    	
+    	db.pwdChange(uId, pwd);
+    	msg = "Password was changed.";
+    	db.closeDb();
+    	
+    	model.addAttribute("message", msg);
+    	
+    	return "index.html";
+    }
+    
     
 }
