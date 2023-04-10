@@ -10,8 +10,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "match")
-public class Match {
+@Table(name = "games")
+public class Game {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,8 +42,8 @@ public class Match {
     @Column(name = "scoreplayer2")
     private int scorePlayer2;
     
-    @Column(name = "date")
-    private LocalDateTime date;
+    @Column(name = "gamedate")
+    private LocalDateTime gamedate;
 
     public int getId() {
         return id;
@@ -118,16 +118,16 @@ public class Match {
     }
 
     public LocalDateTime getDate() {
-        return date;
+        return gamedate;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setDate(LocalDateTime gamedate) {
+        this.gamedate = gamedate;
     }
 
     @Override
     public String toString() {
-        return "Match{" + "id=" + id + ", player1Id=" + player1Id + ", player1=" + player1 + ", player2Id=" + player2Id + ", player2=" + player2 + ", courtId=" + courtId + ", court=" + court + ", scorePlayer1=" + scorePlayer1 + ", scorePlayer2=" + scorePlayer2 + ", date=" + date + '}';
+        return "Match{" + "id=" + id + ", player1Id=" + player1Id + ", player1=" + player1 + ", player2Id=" + player2Id + ", player2=" + player2 + ", courtId=" + courtId + ", court=" + court + ", scorePlayer1=" + scorePlayer1 + ", scorePlayer2=" + scorePlayer2 + ", gamedate=" + gamedate + '}';
     }
     
 }

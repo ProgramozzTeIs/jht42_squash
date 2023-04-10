@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pti.sb_squash_mvc.db.Database;
-import pti.sb_squash_mvc.model.Match;
+import pti.sb_squash_mvc.model.Game;
 import pti.sb_squash_mvc.model.User;
 
 
@@ -40,7 +40,7 @@ public class AppController {
                 returnPage = "changepassword.html";
                 model.addAttribute("user", user);
             } else {
-                List<Match> matchList= db.getAllMatches();
+                List<Game> matchList= db.getAllMatches();
                 
                 returnPage = "index.html";
                 model.addAttribute("matchList", matchList);

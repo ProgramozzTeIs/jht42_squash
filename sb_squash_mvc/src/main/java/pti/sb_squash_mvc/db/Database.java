@@ -12,7 +12,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import pti.sb_squash_mvc.model.Court;
-import pti.sb_squash_mvc.model.Match;
+import pti.sb_squash_mvc.model.Game;
 import pti.sb_squash_mvc.model.User;
 
 public class Database {
@@ -90,9 +90,9 @@ public class Database {
 		sessionFactory.close();
 	}
 
-    public List<Match> getAllMatches() {
+    public List<Game> getAllMatches() {
        
-    	List<Match> matchs = null;
+    	List<Game> matchs = null;
     	
     	Session session = sessionFactory.openSession();
     	Transaction tx = session.beginTransaction();

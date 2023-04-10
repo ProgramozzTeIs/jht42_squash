@@ -16,31 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `courts`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `courts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
+CREATE TABLE `courts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `pwd` varchar(45) NOT NULL,
-  `role` varchar(45) NOT NULL,
-  `loggedin` tinyint NOT NULL,
-  `newuser` tinyint NOT NULL,
+  `address` varchar(45) NOT NULL,
+  `rent` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `courts`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','admin','admin',1,0),(2,'Todd Harrity','tody','player',0,0),(3,'Andrew Dougles','andy','player',0,1),(4,'Sabrina Sobhy','1234','player',0,1);
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `courts` WRITE;
+/*!40000 ALTER TABLE `courts` DISABLE KEYS */;
+INSERT INTO `courts` VALUES (1,'London','2522 London road 32.',54000),(2,'Toronto','1276 Toronto avenue 23/b',62300);
+/*!40000 ALTER TABLE `courts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-07 12:52:05
+-- Dump completed on 2023-04-10 20:13:50

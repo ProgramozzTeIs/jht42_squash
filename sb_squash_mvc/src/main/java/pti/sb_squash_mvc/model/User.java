@@ -2,6 +2,8 @@ package pti.sb_squash_mvc.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +24,7 @@ public class User {
 	@Column(name = "pwd")
 	private String pwd;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name = "role")
 	private Roles role;
 	
