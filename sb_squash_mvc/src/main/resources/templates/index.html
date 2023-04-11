@@ -49,6 +49,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                
         </form>
         
+            <form action="/searchbyuser" method="get">
+	
+		<select name="userId">	
+			<option th:each="m : ${matchList}" th:text="${m.id}" th:value="${m.id}"></option>
+		</select>
+		
+		<input type="submit" value="Választ"/>
+		
+	</form>
+        
+        <p th:text="${filteredList}"></p>
         
     </body>
 </html>

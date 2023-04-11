@@ -114,7 +114,23 @@ public class AppController {
     	return "login.html";
     }
     
-    
+    @GetMapping("/searchbyuser")
+    public String searchByUser(
+    		Model model,
+    		@RequestParam(name="userId") int userId
+    		) {
+    	
+    	Database db = new Database();
+    	List<Game> filteredList = db.getGamesByUserId(userId);
+    	
+    	
+    	db.closeDb();
+    	
+    	model.addAttribute("filteredList", filteredList);
+    	
+    	
+    	return "index.html";
+    } 
     
     
 

@@ -157,7 +157,24 @@ public class Database {
     }
 
 
-	
+    public List<Game> getGamesByUserId(int userId) {
+        
+    	List<Game> games = null;
+    	
+    	Session session = sessionFactory.openSession();
+    	Transaction tx = session.beginTransaction();
+    	
+    	Query query = session.createQuery("SELECT g FROM Game g WHERE g.id = ?1");
+    	query.setParameter(1, userId);
+    	games = query.getResultList();
+    	
+    	tx.commit();
+    	session.close();
+    	
+    	
+        
+        return games;
+    }
 
 
 	
