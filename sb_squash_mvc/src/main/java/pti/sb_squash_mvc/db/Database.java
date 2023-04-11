@@ -1,5 +1,6 @@
 package pti.sb_squash_mvc.db;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -83,6 +84,38 @@ public class Database {
 				
 		return court;
 	}
+	
+	public void pwdChange(int uId, String pwd) {
+		
+		User user = getUserById(uId);
+		user.setPwd(pwd);
+		user.setNewuser(false);
+		user.setLoggedin(true);
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		session.update(user);
+		
+		tx.commit();
+		session.close();
+		
+	}
+	
+	public List<Game> getGamesByCourt(int cId) {
+		List<Game> gameList = new ArrayList<>();
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		Query query = session.createQuery("SELECT g FROM Game g WHERE g.courtId = ?1");
+		query.setParameter(1, cId);
+		gameList = query.getResultList();
+		
+		tx.commit();
+		session.close();
+		
+		return gameList;
+	}
 
 	
 	public void closeDb() {
@@ -118,6 +151,16 @@ public class Database {
         
         return games;
     }
+
+    public void updateUser(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
+	
+
+
+	
     
 
 }
