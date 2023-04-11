@@ -43,7 +43,7 @@ public class AppController {
                 model.addAttribute("user", user);
 
             } else {
-                List<Game> matchList = db.getAllMatches();
+                List<Game> matchList = db.getAllGames();
 
                 user.setLoggedin(true);
                 db.updateUser(user);
@@ -96,7 +96,23 @@ public class AppController {
     	return "index.html";
     }
     
-    
+    @PostMapping("/logout")
+    public String logout(
+    		Model model,
+    		@RequestParam(name = "uid") int uId) {
+    	
+    	String msg = "";
+    	Database db = new Database();
+    	User user = db.getUserById(uId);
+    	user.setLoggedin(false);
+    	msg = "successful logout";
+    	db.closeDb();
+    	
+    	model.addAttribute("uid", uId);
+    	model.addAttribute("message", msg);
+    	
+    	return "login.html";
+    }
     
     
     
