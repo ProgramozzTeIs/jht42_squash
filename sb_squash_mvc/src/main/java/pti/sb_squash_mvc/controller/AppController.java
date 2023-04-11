@@ -10,66 +10,71 @@ import pti.sb_squash_mvc.db.Database;
 import pti.sb_squash_mvc.model.Game;
 import pti.sb_squash_mvc.model.User;
 
-
 @Controller
 public class AppController {
 
-    
     @GetMapping("/")
-    public String loadLoginPage(){
-        
+    public String loadLoginPage() {
+
         return "login.html";
     }
-    
+
     @PostMapping("/login")
     public String checkLogin(Model model,
             @RequestParam(name = "name") String uName,
-            @RequestParam(name = "password") String password){
-        
+            @RequestParam(name = "password") String password) {
+
         String returnPage = "";
-        
+
         Database db = new Database();
         User user = db.userExists(uName, password);
-        
-        
-        if(user == null){
+
+        if (user == null) {
+
             returnPage = "login.html";
             model.addAttribute("error", "User doesn't exist!");
+
         } else {
-            if(user.isNewuser() == true){
+            if (user.isNewuser() == true) {
+
                 returnPage = "changepassword.html";
                 model.addAttribute("user", user);
+
             } else {
-                List<Game> matchList= db.getAllMatches();
-                
+                List<Game> matchList = db.getAllMatches();
+
+                user.setLoggedin(true);
+                db.updateUser(user);
+
                 returnPage = "index.html";
+
+                model.addAttribute("user", user);
                 model.addAttribute("matchList", matchList);
             }
         }
-        
+
         db.closeDb();
-        
+
         return returnPage;
     }
-    
+
     @PostMapping("/index")
     public String changepwd(
-    		Model model,
-    		@RequestParam(name = "uid") int uId,
-    		@RequestParam(name = "password") String pwd
-    		) {
-    	String msg = "";
-    	Database db = new Database();
-    	
-    	db.pwdChange(uId, pwd);
-    	msg = "Password was changed.";
-    	db.closeDb();
-    	
-    	model.addAttribute("uid", uId);
-    	model.addAttribute("message", msg);
-    	
-    	return "index.html";
+            Model model,
+            @RequestParam(name = "uid") int uId,
+            @RequestParam(name = "password") String pwd
+    ) {
+        String msg = "";
+        Database db = new Database();
+
+        db.pwdChange(uId, pwd);
+        msg = "Password was changed.";
+        db.closeDb();
+
+        model.addAttribute("uid", uId);
+        model.addAttribute("message", msg);
+
+        return "index.html";
     }
-    
-    
+
 }

@@ -117,13 +117,14 @@ public class Game {
         this.scorePlayer2 = scorePlayer2;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDateTime getGamedate() {
         return gamedate;
     }
 
-    public void setDate(LocalDateTime gamedate) {
+    public void setGamedate(LocalDateTime gamedate) {
         this.gamedate = gamedate;
     }
+
 
     @Override
     public String toString() {

@@ -9,7 +9,6 @@
 		
 		<mapping class="pti.sb_squash_mvc.model.Court" />
 		<mapping class="pti.sb_squash_mvc.model.Game" />
-		<mapping class="pti.sb_squash_mvc.model.Roles" />
 		<mapping class="pti.sb_squash_mvc.model.User" />
 	
 	</session-factory>

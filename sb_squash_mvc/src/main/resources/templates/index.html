@@ -10,6 +10,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <p style="color: green" th:text="${msg}"></p>
+        <form action="/logout" method="Post">
+            <input type="submit" value="Logout"/></br>
+        </form>
+        <Label>Logged in user: <output th:text="${user.name}" th:value="${user.id}" name="userid"/></Label>
         <table>
             <thead>
                 <tr>
@@ -30,7 +35,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <td th:text="${match.scorePlayer1}"/></td>
                     <td th:text="${match.scorePlayer2}"/></td>
                     <td th:text="${match.court.name}"/></td>
-                    <td th:text="${match.date}"/></td>
+                    <td th:text="${match.gamedate}"/></td>
                 </tr>
             </tbody>
         </table> 
