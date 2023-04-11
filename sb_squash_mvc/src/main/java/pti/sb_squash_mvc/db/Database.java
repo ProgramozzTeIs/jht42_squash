@@ -1,5 +1,6 @@
 package pti.sb_squash_mvc.db;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -100,6 +101,21 @@ public class Database {
 		session.close();
 		
 	}
+	
+	public List<Game> getGamesByCourt(int cId) {
+		List<Game> gameList = new ArrayList<>();
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		Query query = session.createQuery("SELECT g FROM Game g WHERE g.courtId = ?1");
+		query.setParameter(1, cId);
+		gameList = query.getResultList();
+		
+		tx.commit();
+		session.close();
+		
+		return gameList;
+	}
 
 	
 	public void closeDb() {
@@ -127,6 +143,9 @@ public class Database {
     public void updateUser(User user) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+
+	
 
 
 	

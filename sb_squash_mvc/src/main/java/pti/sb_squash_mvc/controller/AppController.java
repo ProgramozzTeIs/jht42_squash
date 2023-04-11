@@ -1,6 +1,8 @@
 package pti.sb_squash_mvc.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,7 +60,7 @@ public class AppController {
         return returnPage;
     }
 
-    @PostMapping("/index")
+    @PostMapping("/changepwd")
     public String changepwd(
             Model model,
             @RequestParam(name = "uid") int uId,
@@ -76,5 +78,28 @@ public class AppController {
 
         return "index.html";
     }
+    
+    @GetMapping("/searchbycourt")
+    public String searchByCourt(
+    		Model model,
+    		@RequestParam(name = "uid") int uId,
+    		@RequestParam(name = "cid") int cId
+    		) {
+    	List<Game> gameList = new ArrayList<>();
+    	Database db = new Database();
+    	gameList = db.getGamesByCourt(cId);
+    	db.closeDb();
+    	
+    	model.addAttribute("uid", uId);
+    	model.addAttribute("gamelist", gameList);
+    	
+    	return "index.html";
+    }
+    
+    
+    
+    
+    
+    
 
 }
