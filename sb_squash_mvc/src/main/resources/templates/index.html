@@ -28,16 +28,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </tr>
             </thead>
             <tbody>
-                <tr style="text-align: center" th:each ="match : ${matchList}">
-                    <td th:text ="${match.id}"></td>
-                    <td th:text="${match.player1.name}"></td>
-                    <td th:text="${match.player2.name}"/></td>
-                    <td th:text="${match.scorePlayer1}"/></td>
-                    <td th:text="${match.scorePlayer2}"/></td>
-                    <td th:text="${match.court.name}"/></td>
-                    <td th:text="${match.gamedate}"/></td>
+                <tr style="text-align: center" th:each ="game : ${gameList}">
+                    <td th:text ="${game.id}"></td>
+                    <td th:text="${game.player1.name}"></td>
+                    <td th:text="${game.player2.name}"/></td>
+                    <td th:text="${game.scorePlayer1}"/></td>
+                    <td th:text="${game.scorePlayer2}"/></td>
+                    <td th:text="${game.court.name}"/></td>
+                    <td th:text="${game.gamedate}"/></td>
                 </tr>
             </tbody>
         </table> 
+        
+        <form action="/searchbycourt" method="get">
+        	<select name="courtId">
+        		<option th:each="cid : ${courtidlist}" th:text="${cid}" th:value="${cid}"></option>
+        		<input type="hidden" name="uid" th:value="${uid}"/>
+        		<input type="submit" />
+        	</select>
+               
+        </form>
+        
+        
     </body>
 </html>
