@@ -106,6 +106,9 @@ public class Database {
 		query.setParameter(1, cId);
 		gameList = query.getResultList();
 		
+		gameList = loadUsersAndCourtForGames(gameList);
+		
+		
 		tx.commit();
 		session.close();
 		
@@ -129,23 +132,7 @@ public class Database {
     	games = query.getResultList();
     	
     	
-    	for (int index = 0; index < games.size(); index++) {
-    		
-    		Game currentGame = games.get(index);
-    		
-    		
-    		/** USER1 */
-    		User user1 = getUserById(currentGame.getPlayer1Id());
-    		currentGame.setPlayer1(user1);
-    		
-    		/** USER2 */
-    		User user2 = getUserById(currentGame.getPlayer2Id());
-    		currentGame.setPlayer2(user2);
-    		
-    		/** COURT */
-    		Court court =getCourtById(currentGame.getCourtId());
-    		currentGame.setCourt(court);
-    	}
+    	games = loadUsersAndCourtForGames(games);
     	
     	
     	tx.commit();
@@ -179,6 +166,9 @@ public class Database {
     	query.setParameter(1, userId);
     	games = query.getResultList();
     	
+    	games = loadUsersAndCourtForGames(games);
+    	
+    	
     	tx.commit();
     	session.close();
     	
@@ -188,7 +178,30 @@ public class Database {
     }
 
 
-	
+	private List<Game> loadUsersAndCourtForGames(List<Game> gameList) {
+		
+		
+		for (int index = 0; index < gameList.size(); index++) {
+    		
+    		Game currentGame = gameList.get(index);
+    		
+    		
+    		/** USER1 */
+    		User user1 = getUserById(currentGame.getPlayer1Id());
+    		currentGame.setPlayer1(user1);
+    		
+    		/** USER2 */
+    		User user2 = getUserById(currentGame.getPlayer2Id());
+    		currentGame.setPlayer2(user2);
+    		
+    		/** COURT */
+    		Court court =getCourtById(currentGame.getCourtId());
+    		currentGame.setCourt(court);
+    	}
+		
+		
+		return gameList;
+	}
     
 
 }
