@@ -128,7 +128,7 @@ public class Game {
 
     @Override
     public String toString() {
-        return "Match{" + "id=" + id + ", player1Id=" + player1Id + ", player1=" + player1 + ", player2Id=" + player2Id + ", player2=" + player2 + ", courtId=" + courtId + ", court=" + court + ", scorePlayer1=" + scorePlayer1 + ", scorePlayer2=" + scorePlayer2 + ", gamedate=" + gamedate + '}';
+        return "Game{" + "id=" + id + ", player1Id=" + player1Id + ", player1=" + player1 + ", player2Id=" + player2Id + ", player2=" + player2 + ", courtId=" + courtId + ", court=" + court + ", scorePlayer1=" + scorePlayer1 + ", scorePlayer2=" + scorePlayer2 + ", gamedate=" + gamedate + '}';
     }
     
 }

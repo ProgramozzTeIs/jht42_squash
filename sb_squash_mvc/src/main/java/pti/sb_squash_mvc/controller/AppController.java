@@ -43,7 +43,7 @@ public class AppController {
                 model.addAttribute("user", user);
 
             } else {
-                List<Game> matchList = db.getAllGames();
+                List<Game> gameList = db.getAllGames();
 
                 user.setLoggedin(true);
                 db.updateUser(user);
@@ -51,7 +51,7 @@ public class AppController {
                 returnPage = "index.html";
 
                 model.addAttribute("user", user);
-                model.addAttribute("matchList", matchList);
+                model.addAttribute("gameList", gameList);
             }
         }
 
