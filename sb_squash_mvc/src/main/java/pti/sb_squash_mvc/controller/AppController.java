@@ -108,9 +108,7 @@ public class AppController {
     	User user = db.getUserById(uId);
     	String site = "";
     	if(user.isLoggedin()) {
-    		System.out.println();
-			System.out.println(user.isLoggedin());
-			System.out.println();
+    		
     		gameList = db.getGamesByCourt(cId);
         	List<User> userList = db.getAllUsers();
             List<Court> courtList = db.getAllCourts();
