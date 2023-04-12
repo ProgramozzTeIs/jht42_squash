@@ -199,8 +199,9 @@ public class Database {
     	Session session = sessionFactory.openSession();
     	Transaction tx = session.beginTransaction();
     	
-    	Query query = session.createQuery("SELECT g FROM Game g WHERE g.id = ?1");
+    	Query query = session.createQuery("SELECT g FROM Game g WHERE g.player1Id = ?1 OR g.player2Id = ?2");
     	query.setParameter(1, userId);
+    	query.setParameter(2, userId);
     	games = query.getResultList();
     	
     	games = loadUsersAndCourtForGames(games);

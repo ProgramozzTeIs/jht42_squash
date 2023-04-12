@@ -131,18 +131,21 @@ public class AppController {
     @GetMapping("/searchbyuser")
     public String searchByUser(
     		Model model,
-    		@RequestParam(name="userId") int userId
+    		@RequestParam(name="searched_userid") int searchedUserId,
+    		@RequestParam(name="loggedin_userid") int loggedInUserId
     		) {
     	
     	Database db = new Database();
-    	List<Game> filteredList = db.getGamesByUserId(userId);
+    	List<Game> filteredList = db.getGamesByUserId(searchedUserId);
+    	User loggedInUser = db.getUserById(loggedInUserId);
     	List<User> userList = db.getAllUsers();
         List<Court> courtList = db.getAllCourts();
     	
     	
     	db.closeDb();
     	
-    	model.addAttribute("filteredList", filteredList);
+    	model.addAttribute("user", loggedInUser);
+    	model.addAttribute("gameList", filteredList);
     	model.addAttribute("userList", userList);
         model.addAttribute("courtList", courtList);
     	

@@ -54,15 +54,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         
         <form action="/searchbyuser" method="get">
 
-			<select name="userId">	
+			<select name="searched_userid">	
 				<option th:each="u : ${userList}" th:text="${u.name}" th:value="${u.id}"></option>
 			</select>
 			
+			<input type="hidden" name="loggedin_userid" th:value="${user.id}" />
 			<input type="submit" value="Választ"/>
 			
-		</form>
-        
-        <p th:text="${filteredList}"></p>
-        
+		</form>        
     </body>
 </html>
