@@ -44,7 +44,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         
         <form action="/searchbycourt" method="get">
         	<select name="courtId">
+
         		<option th:each="c : ${courtList}" th:text="${c.name}" th:value="${c.id}"></option>
+        		
         	</select>
         	
       	    <input type="hidden" name="userId" th:value="${user.id}"/>

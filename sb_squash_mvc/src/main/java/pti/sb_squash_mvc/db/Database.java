@@ -131,8 +131,10 @@ public class Database {
     	Query query = session.createQuery("SELECT g FROM Game g ORDER BY g.gamedate");
     	games = query.getResultList();
     	
+
     	
     	games = loadUsersAndCourtForGames(games);
+
     	
     	
     	tx.commit();
