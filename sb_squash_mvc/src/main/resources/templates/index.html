@@ -12,6 +12,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <body>
         <p style="color: green" th:text="${msg}"></p>
         <form action="/logout" method="Post">
+            <input type="hidden" name="uid" th:value="${user.id}" />
             <input type="submit" value="Logout"/></br>
         </form>
         <Label>Logged in user: <output th:text="${user.name}" th:value="${user.id}" name="userid"/></Label>

@@ -105,10 +105,12 @@ public class AppController {
     	Database db = new Database();
     	User user = db.getUserById(uId);
     	user.setLoggedin(false);
+    	db.updateUser(user);
     	msg = "successful logout";
     	db.closeDb();
     	
-    	model.addAttribute("uid", uId);
+    	
+    	
     	model.addAttribute("message", msg);
     	
     	return "login.html";
