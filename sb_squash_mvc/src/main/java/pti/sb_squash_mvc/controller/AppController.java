@@ -82,16 +82,17 @@ public class AppController {
     @GetMapping("/searchbycourt")
     public String searchByCourt(
     		Model model,
-    		@RequestParam(name = "uid") int uId,
-    		@RequestParam(name = "cid") int cId
+    		@RequestParam(name = "userId") int uId,
+    		@RequestParam(name = "courtId") int cId
     		) {
     	List<Game> gameList = new ArrayList<>();
     	Database db = new Database();
+    	User user = db.getUserById(uId);
     	gameList = db.getGamesByCourt(cId);
     	db.closeDb();
     	
-    	model.addAttribute("uid", uId);
-    	model.addAttribute("gamelist", gameList);
+    	model.addAttribute("user", user);
+    	model.addAttribute("gameList", gameList);
     	
     	return "index.html";
     }

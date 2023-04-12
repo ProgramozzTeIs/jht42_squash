@@ -46,7 +46,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         		<option th:each="g : ${gameList}" th:text="${g.court.name}" th:value="${g.courtId}"></option>
         	</select>
         	
-      	    <input type="hidden" name="uid" th:value="${uid}"/>
+      	    <input type="hidden" name="userId" th:value="${user.id}"/>
             <input type="submit" />
                
         </form>
