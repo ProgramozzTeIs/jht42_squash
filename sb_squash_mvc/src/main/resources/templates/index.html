@@ -41,25 +41,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </tbody>
         </table> 
         
+        
         <form action="/searchbycourt" method="get">
         	<select name="courtId">
-        		<option th:each="g : ${gameList}" th:text="${g.court.name}" th:value="${g.courtId}"></option>
+        		<option th:each="c : ${courtList}" th:text="${c.name}" th:value="${c.id}"></option>
         	</select>
         	
       	    <input type="hidden" name="userId" th:value="${user.id}"/>
             <input type="submit" />
-               
         </form>
         
-            <form action="/searchbyuser" method="get">
-	
-		<select name="userId">	
-			<option th:each="g : ${gameList}" th:text="${g.id}" th:value="${g.id}"></option>
-		</select>
-		
-		<input type="submit" value="Választ"/>
-		
-	</form>
+        
+        <form action="/searchbyuser" method="get">
+
+			<select name="userId">	
+				<option th:each="u : ${userList}" th:text="${u.name}" th:value="${u.id}"></option>
+			</select>
+			
+			<input type="submit" value="Választ"/>
+			
+		</form>
         
         <p th:text="${filteredList}"></p>
         

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pti.sb_squash_mvc.db.Database;
+import pti.sb_squash_mvc.model.Court;
 import pti.sb_squash_mvc.model.Game;
 import pti.sb_squash_mvc.model.User;
 
@@ -44,6 +45,8 @@ public class AppController {
 
             } else {
                 List<Game> gameList = db.getAllGames();
+                List<User> userList = db.getAllUsers();
+                List<Court> courtList = db.getAllCourts();
 
                 user.setLoggedin(true);
                 db.updateUser(user);
@@ -51,6 +54,9 @@ public class AppController {
                 returnPage = "index.html";
 
                 model.addAttribute("user", user);
+                
+                model.addAttribute("userList", userList);
+                model.addAttribute("courtList", courtList);
                 model.addAttribute("gameList", gameList);
             }
         }
@@ -89,10 +95,15 @@ public class AppController {
     	Database db = new Database();
     	User user = db.getUserById(uId);
     	gameList = db.getGamesByCourt(cId);
+    	List<User> userList = db.getAllUsers();
+        List<Court> courtList = db.getAllCourts();
     	db.closeDb();
     	
     	model.addAttribute("user", user);
     	model.addAttribute("gameList", gameList);
+    	model.addAttribute("userList", userList);
+        model.addAttribute("courtList", courtList);
+    	
     	
     	return "index.html";
     }
@@ -125,11 +136,15 @@ public class AppController {
     	
     	Database db = new Database();
     	List<Game> filteredList = db.getGamesByUserId(userId);
+    	List<User> userList = db.getAllUsers();
+        List<Court> courtList = db.getAllCourts();
     	
     	
     	db.closeDb();
     	
     	model.addAttribute("filteredList", filteredList);
+    	model.addAttribute("userList", userList);
+        model.addAttribute("courtList", courtList);
     	
     	
     	return "index.html";

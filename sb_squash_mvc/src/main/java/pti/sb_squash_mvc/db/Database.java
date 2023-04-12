@@ -141,6 +141,43 @@ public class Database {
         
         return games;
     }
+    
+    
+    public List<User> getAllUsers() {
+    	
+    	List<User> users = null;
+    	
+    	Session session = sessionFactory.openSession();
+    	Transaction tx = session.beginTransaction();
+    	
+    	Query query = session.createQuery("SELECT u FROM User u");
+    	users = query.getResultList();
+    	
+    	
+    	tx.commit();
+    	session.close();
+    	
+    	return users;
+    }
+    
+    
+    public List<Court> getAllCourts() {
+    	
+    	List<Court> courts = null;
+    	
+    	Session session = sessionFactory.openSession();
+    	Transaction tx = session.beginTransaction();
+    	
+    	Query query = session.createQuery("SELECT c FROM Court c");
+    	courts = query.getResultList();
+    	
+    	
+    	tx.commit();
+    	session.close();
+    	
+    	return courts;
+    }
+    
 
     public void updateUser(User user) {
     	
