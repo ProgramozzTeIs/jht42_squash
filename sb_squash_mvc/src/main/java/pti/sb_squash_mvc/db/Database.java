@@ -120,7 +120,6 @@ public class Database {
 
     public List<Game> getAllGames() {
        
-    	Game game = null;
     	List<Game> games = null;
     	
     	Session session = sessionFactory.openSession();
@@ -129,14 +128,23 @@ public class Database {
     	Query query = session.createQuery("SELECT g FROM Game g ORDER BY g.gamedate");
     	games = query.getResultList();
     	
-    	for (int index = 0; games.size() <0 ; index++) {
+    	
+    	for (int index = 0; index < games.size(); index++) {
     		
-    		User user = getUserById(game.getPlayer1Id());
-    		game.setPlayer1(user);
-    		user = getUserById(game.getPlayer2Id());
-    		game.setPlayer2(user);
-    		Court court =getCourtById(game.getCourtId());
-    		game.setCourt(court);
+    		Game currentGame = games.get(index);
+    		
+    		
+    		/** USER1 */
+    		User user1 = getUserById(currentGame.getPlayer1Id());
+    		currentGame.setPlayer1(user1);
+    		
+    		/** USER2 */
+    		User user2 = getUserById(currentGame.getPlayer2Id());
+    		currentGame.setPlayer2(user2);
+    		
+    		/** COURT */
+    		Court court =getCourtById(currentGame.getCourtId());
+    		currentGame.setCourt(court);
     	}
     	
     	
