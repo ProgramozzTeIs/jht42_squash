@@ -42,10 +42,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         
         <form action="/searchbycourt" method="get">
         	<select name="courtId">
-        		<option th:each="g : ${gamelist}" th:text="${g.courtId}" th:value="${g.courtId}"></option>
-        		<input type="hidden" name="uid" th:value="${uid}"/>
-        		<input type="submit" />
+        		<option th:each="g : ${gameList}" th:text="${g.court.name}" th:value="${g.courtId}"></option>
         	</select>
+        	
+      	    <input type="hidden" name="uid" th:value="${uid}"/>
+            <input type="submit" />
                
         </form>
         
