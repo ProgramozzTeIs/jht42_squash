@@ -77,9 +77,21 @@ public class AppController {
 
         db.pwdChange(uId, pwd);
         msg = "Password was changed.";
+        
+        
+        User user = db.getUserById(uId);
+        List<Game> gameList = db.getAllGames();
+        List<User> userList = db.getAllUsers();
+        List<Court> courtList = db.getAllCourts();
+        
+        
         db.closeDb();
 
-        model.addAttribute("uid", uId);
+        
+        model.addAttribute("user", user);
+        model.addAttribute("gameList", gameList);
+        model.addAttribute("userList", userList);
+        model.addAttribute("courtList", courtList);
         model.addAttribute("message", msg);
 
         return "index.html";
