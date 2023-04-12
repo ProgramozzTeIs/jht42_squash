@@ -92,13 +92,8 @@ public class Database {
 		user.setNewuser(false);
 		user.setLoggedin(true);
 		
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		updateUser(user);
 		
-		session.update(user);
-		
-		tx.commit();
-		session.close();
 		
 	}
 	
@@ -153,7 +148,15 @@ public class Database {
     }
 
     public void updateUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    	
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		session.update(user);
+		
+		tx.commit();
+		session.close();
+    	
     }
 
 
