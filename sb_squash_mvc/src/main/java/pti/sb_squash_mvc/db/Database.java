@@ -65,7 +65,9 @@ public class Database {
 		Transaction tx = session.beginTransaction();
 		
 		user = session.get(User.class, id);
-				
+				System.out.println();
+				System.out.println(user);
+				System.out.println();
 		tx.commit();
 		session.close();
 				
@@ -131,11 +133,7 @@ public class Database {
     	Query query = session.createQuery("SELECT g FROM Game g ORDER BY g.gamedate");
     	games = query.getResultList();
     	
-
-    	
-    	games = loadUsersAndCourtForGames(games);
-
-    	
+    	games = loadUsersAndCourtForGames(games);    	
     	
     	tx.commit();
     	session.close();

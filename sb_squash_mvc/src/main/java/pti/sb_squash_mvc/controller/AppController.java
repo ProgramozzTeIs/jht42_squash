@@ -106,18 +106,27 @@ public class AppController {
     	List<Game> gameList = new ArrayList<>();
     	Database db = new Database();
     	User user = db.getUserById(uId);
-    	gameList = db.getGamesByCourt(cId);
-    	List<User> userList = db.getAllUsers();
-        List<Court> courtList = db.getAllCourts();
-    	db.closeDb();
-    	
-    	model.addAttribute("user", user);
-    	model.addAttribute("gameList", gameList);
-    	model.addAttribute("userList", userList);
-        model.addAttribute("courtList", courtList);
-    	
-    	
-    	return "index.html";
+    	String site = "";
+    	if(user.isLoggedin()) {
+    		System.out.println();
+			System.out.println(user.isLoggedin());
+			System.out.println();
+    		gameList = db.getGamesByCourt(cId);
+        	List<User> userList = db.getAllUsers();
+            List<Court> courtList = db.getAllCourts();
+        	db.closeDb();
+        	
+        	model.addAttribute("user", user);
+        	model.addAttribute("gameList", gameList);
+        	model.addAttribute("userList", userList);
+            model.addAttribute("courtList", courtList);
+            
+            site = "index.html";
+    	} else {
+    		site = "login.html";
+    	}
+    	    	
+    	return site;
     }
     
     @PostMapping("/logout")
