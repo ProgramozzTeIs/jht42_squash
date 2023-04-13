@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<p th:text="${msg}" />
+
+	<form action="\addgame" method="post">
+		
+		<p>Játékos 1</p>
+		<select name="player1Id">
+			<option th:each=" ul : ${userList}" th:text="${ul.name}" th:value="${ul.id}"></option>
+		</select>
+			
+		<p>Játékos 2</p>
+		<select name="player2Id">
+			<option th:each=" ul : ${userList}" th:text="${ul.name}" th:value="${ul.id}"></option>
+		</select>
+			
+		<p>Helyszín neve</p>
+		<select name="courtId">
+			<option th:each=" cl : ${courtList}" th:text="${cl.name}" th:value="${cl.id}"></option>
+		</select>
+			
+		<p>Játékos 1 pontszáma</p>
+		<input type="number" name="scoreplayer1">
+			
+		<p>Játékos 2 pontszáma</p>
+		<input type="number" name="scoreplayer2">
+			
+		<p>Dátum</p>
+		<input type="date" name="gamedate">
+			
+		<input type="submit" value="Játék létrehozása" />
+		
+	</form>
+	
+	<form action="\showgames" method="get">
+	
+	<a href="index.html">link a főoldalra</a>
+	
+	</form>
+
+
+</body>
+</html> 

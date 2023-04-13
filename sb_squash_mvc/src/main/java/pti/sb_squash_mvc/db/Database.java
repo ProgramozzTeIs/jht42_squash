@@ -238,6 +238,19 @@ public class Database {
 		
 		return gameList;
 	}
+	
+	public void createNewGame(Game newGame) {
+		
+		
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+	
+		session.save(newGame);
+
+		transaction.commit();
+		session.close();
+
+	}
     
 
 }

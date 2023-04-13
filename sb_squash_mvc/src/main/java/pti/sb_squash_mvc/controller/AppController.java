@@ -1,5 +1,6 @@
 package pti.sb_squash_mvc.controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -178,6 +179,72 @@ public class AppController {
     	
     	return site;
     } 
+    
+    
+    @GetMapping("/admin")
+    public String createGame(
+    		Model model
+    		) {
+    	
+    	Database db = new Database();
+    	
+    	List<User> userList = db.getAllUsers();
+    	List<Court> courtList = db.getAllCourts();
+    	
+    	db.closeDb();
+ 
+    	model.addAttribute("userList", userList);
+    	model.addAttribute("courtList", courtList);
+    	
+    	return "admin.html";
+    }
+    
+    @PostMapping("/addgame")
+    public String createGame(
+    		Model model,
+    		@RequestParam(name="player1Id") int player1Id,
+    		@RequestParam(name="player2Id") int player2Id,
+    		@RequestParam(name="courtId") int courtId,
+    		@RequestParam(name="scoreplayer1") int sP1,
+    		@RequestParam(name="scoreplayer2") int sP2,  		
+    		@RequestParam(name="gamedate") String gamedate
+    		) {
+    	
+    	Game newGame = new Game();
+    	String msg = "";
+    	
+    	newGame.setPlayer1Id(player1Id);
+    	newGame.setPlayer2Id(player2Id);
+    	newGame.setCourtId(courtId);
+    	newGame.setScorePlayer1(sP1);
+    	newGame.setScorePlayer2(sP2);
+    	newGame.setGamedate(LocalDateTime.now()); // ------TEMP SOLUTION-----------
+    	
+    	if(player1Id != player2Id) {
+    		
+    		Database db = new Database();
+        	db.createNewGame(newGame);
+        	db.closeDb();	
+    	}
+    	else {
+    		
+    		msg = "Nem lehet ugyan az a két játékos";
+    		
+    	}
+    	
+    	model.addAttribute("msg", msg);
+
+    	return "admin.html";
+    }
+    
+    @GetMapping("/showgames")
+    public String showgames(Model model) {
+    		
+    	// ez még nincs kész, username password-ot vár
+    	// + a listák adatait
+    	
+    	return "index.html";
+    }
     
     
 
