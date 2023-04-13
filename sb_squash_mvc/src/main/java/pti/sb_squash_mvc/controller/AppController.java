@@ -157,19 +157,26 @@ public class AppController {
     	Database db = new Database();
     	List<Game> filteredList = db.getGamesByUserId(searchedUserId);
     	User loggedInUser = db.getUserById(loggedInUserId);
-    	List<User> userList = db.getAllUsers();
-        List<Court> courtList = db.getAllCourts();
+    	String site = "";
     	
+    	if(loggedInUser.isLoggedin()) {
     	
-    	db.closeDb();
+	    	List<User> userList = db.getAllUsers();
+	        List<Court> courtList = db.getAllCourts();
+	    	
+	    	db.closeDb();
+	    	
+	    	model.addAttribute("user", loggedInUser);
+	    	model.addAttribute("gameList", filteredList);
+	    	model.addAttribute("userList", userList);
+	        model.addAttribute("courtList", courtList);
+	        site = "index.html";
+    	}
+    	else {
+    		site = "login.html";
+    	}
     	
-    	model.addAttribute("user", loggedInUser);
-    	model.addAttribute("gameList", filteredList);
-    	model.addAttribute("userList", userList);
-        model.addAttribute("courtList", courtList);
-    	
-    	
-    	return "index.html";
+    	return site;
     } 
     
     
