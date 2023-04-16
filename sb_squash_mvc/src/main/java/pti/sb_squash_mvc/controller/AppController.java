@@ -285,10 +285,25 @@ public class AppController {
     }
     
     @GetMapping("/showgames")
-    public String showgames(Model model) {
-    		
-    	// ez még nincs kész, username password-ot vár
-    	// + a listák adatait
+    public String showgames(
+    		Model model,
+    		@RequestParam(name = "uid") int uId
+    		) {
+    	System.out.println(uId);
+    	System.out.println("grehbrerhghd");
+    	Database db = new Database();
+    	
+    	List<Game> gameList = db.getAllGames();
+        List<User> userList = db.getAllUsers();
+        List<Court> courtList = db.getAllCourts();
+    	
+        User user = db.getUserById(uId);
+        model.addAttribute("user", user);
+        
+        model.addAttribute("userList", userList);
+        model.addAttribute("courtList", courtList);
+        model.addAttribute("gameList", gameList);
+        
     	
     	return "index.html";
     }

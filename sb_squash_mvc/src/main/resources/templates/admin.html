@@ -60,7 +60,9 @@
 	
 	<form action="\showgames" method="get">
 	
-	<a href="index.html">link a főoldalra</a>
+ 		<input type="hidden" name="uid" th:value="${user.id}" />
+		
+	<a href="/showgames">link a főoldalra</a>
 	
 	</form>
 	
