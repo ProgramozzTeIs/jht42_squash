@@ -188,7 +188,18 @@ public class Database {
 		session.close();
     	
     }
-
+    
+    public void insertCourt(Court court) {
+    	
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		session.save(court);
+		
+		tx.commit();
+		session.close();
+    	
+    }
 
     public List<Game> getGamesByUserId(int userId) {
         

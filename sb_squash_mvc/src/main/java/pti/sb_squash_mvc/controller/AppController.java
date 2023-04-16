@@ -4,10 +4,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.crypto.Data;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pti.sb_squash_mvc.db.Database;
 import pti.sb_squash_mvc.model.Court;
@@ -51,8 +54,13 @@ public class AppController {
 
                 user.setLoggedin(true);
                 db.updateUser(user);
-
-                returnPage = "index.html";
+                
+                if(user.getName().equals("admin")) {
+                	returnPage = "admin.html";
+                } else {
+                	returnPage = "index.html";
+                }
+                
 
                 model.addAttribute("user", user);
                 
@@ -183,7 +191,8 @@ public class AppController {
     
     @GetMapping("/admin")
     public String createGame(
-    		Model model
+    		Model model,
+    		@RequestParam(name="loggedin_userid") int loggedInUserId
     		) {
     	
     	Database db = new Database();
@@ -195,6 +204,43 @@ public class AppController {
  
     	model.addAttribute("userList", userList);
     	model.addAttribute("courtList", courtList);
+    	
+    	return "admin.html";
+    }
+    
+    @PostMapping("/addcourt")
+    public String createCourt(
+    		Model model,
+    		@RequestParam(name="courtname") String name,
+    		@RequestParam(name="courtaddress") String address,
+    		@RequestParam(name="courtrent") int rent,
+    		@RequestParam(name="loggedin_userid") int adminId
+    		) {
+    	Court newCourt = new Court();
+    	String msg = "";
+    	
+    	Database db = new Database();
+    	User admin = db.getUserById(adminId);
+    	
+    	if(admin.isLoggedin()) {
+    		newCourt.setName(name);
+        	newCourt.setAddress(address);
+        	newCourt.setRent(rent);
+        	db.insertCourt(newCourt);
+        	msg = "Success insert court.";
+        	
+    	} else {
+    		msg = "Admin isn't logged in!";
+    	}
+    	
+    	List<User> userList = db.getAllUsers();
+    	List<Court> courtList = db.getAllCourts();
+    	db.closeDb();
+    	
+    	model.addAttribute("msg", msg);
+    	model.addAttribute("userList", userList);
+    	model.addAttribute("courtList", courtList);
+    	model.addAttribute("user", admin);
     	
     	return "admin.html";
     }
@@ -245,6 +291,7 @@ public class AppController {
     	
     	return "index.html";
     }
+    
     
     
 

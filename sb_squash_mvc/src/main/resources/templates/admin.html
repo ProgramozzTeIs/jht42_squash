@@ -2,11 +2,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Admin site</title>
 </head>
 <body>
+	
+	<Label>Logged in: <output th:text="${user.name}" th:value="${user.id}" name="userid"/></Label>
 
 	<p th:text="${msg}" />
+	<p> Új helyszín adatai:"</p>
+	<form action="/addcourt" method="post">
+		
+		<p>A helyszín neve?</p>
+		<input type="text" name="courtname" />
+		
+		<p>A helyszín címe?</p>
+		<input type="text" name="courtaddress" />
+		
+		<p>A helyszín bérleti díja?</p>
+		<input type="number" name="courtrent" />
+		
+		<input type="hidden" name="loggedin_userid" th:value="${user.id}" />
+		<input type="submit" />		
+		
+		
+	</form>
+		
 
 	<form action="\addgame" method="post">
 		
