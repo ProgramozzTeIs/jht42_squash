@@ -263,5 +263,17 @@ public class Database {
 
 	}
     
+	public void addUser (User newUser) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		session.save(newUser);
+		
+		tx.commit();
+		session.close();
+				
+		
+	}
 
 }

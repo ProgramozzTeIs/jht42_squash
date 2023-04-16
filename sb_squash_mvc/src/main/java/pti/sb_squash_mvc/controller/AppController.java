@@ -3,6 +3,7 @@ package pti.sb_squash_mvc.controller;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.xml.crypto.Data;
 
@@ -292,7 +293,42 @@ public class AppController {
     	return "index.html";
     }
     
-    
+    @PostMapping("/adduser")
+    public String addUser(
+    		Model model,
+    		@RequestParam(name="username") String name,
+    		@RequestParam(name="loggedin_adminid") int adminId
+    		) {
+    	User newUser = new User();
+    	String msg = "";
+    	Random random = new Random();
+    	int pwd = random.nextInt(10000)+1001;
+    	String s = String.valueOf(pwd); 		
+    	Database db = new Database();
+    	User admin = db.getUserById(adminId);
+    	
+    	if(admin.isLoggedin()) {
+    		
+    		newUser.setName(name);
+    		newUser.setPwd(s);
+           	db.addUser(newUser);
+        	msg = "Add new user";
+        	
+    	} else {
+    		msg = "logged in!";
+    	}
+    	
+    	List<User> userList = db.getAllUsers();
+    	List<Court> courtList = db.getAllCourts();
+    	db.closeDb();
+    	
+    	model.addAttribute("user", admin);
+    	model.addAttribute("msg", msg);
+    	model.addAttribute("userList", userList);
+    	model.addAttribute("courtList", courtList);
+    	    	
+    	return "admin.html";
+    }
     
 
 }
