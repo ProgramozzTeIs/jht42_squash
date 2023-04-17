@@ -246,6 +246,7 @@ public class AppController {
     @PostMapping("/addgame")
     public String createGame(
             Model model,
+            @RequestParam(name = "loggedin_adminid") int adminId,
             @RequestParam(name = "player1Id") int player1Id,
             @RequestParam(name = "player2Id") int player2Id,
             @RequestParam(name = "courtId") int courtId,
@@ -254,30 +255,56 @@ public class AppController {
             @RequestParam(name = "gamedate") String gamedate
     ) {
 
-        Game newGame = new Game();
-        String msg = "";
+    	String targetPage = "admin.html";
+    	Database db = new Database();
+    	User user = db.getUserById(adminId);
+    	
+    	/** LOGGED IN? */
+    	if(user.isLoggedin() == true) {
+    		
+	        Game newGame = new Game();
+	        String msg = "";
+	
+	        newGame.setPlayer1Id(player1Id);
+	        newGame.setPlayer2Id(player2Id);
+	        newGame.setCourtId(courtId);
+	        newGame.setScorePlayer1(sP1);
+	        newGame.setScorePlayer2(sP2);
+	        
+//	        System.out.println(gamedate);
+	        gamedate += ":00";
+	        newGame.setGamedate( LocalDateTime.parse(gamedate) );
+	
+	        
+	        if (player1Id != player2Id) {
+	
+	            db.createNewGame(newGame);
+	        } else {
+	
+	            msg = "Nem lehet ugyan az a két játékos";
+	
+	        }
+	
+	        model.addAttribute("msg", msg);
+	        
+	        
+	        
+	        List<Game> gameList = db.getAllGames();
+	        List<User> userList = db.getAllUsers();
+	        List<Court> courtList = db.getAllCourts();
+	        model.addAttribute("user", user);
+	        model.addAttribute("userList", userList);
+	        model.addAttribute("courtList", courtList);
+	        model.addAttribute("gameList", gameList);
+    	}
+    	else {
+    		
+    		targetPage = "login.html";
+    	}
+        
+        db.closeDb();
 
-        newGame.setPlayer1Id(player1Id);
-        newGame.setPlayer2Id(player2Id);
-        newGame.setCourtId(courtId);
-        newGame.setScorePlayer1(sP1);
-        newGame.setScorePlayer2(sP2);
-        newGame.setGamedate(LocalDateTime.now()); // ------TEMP SOLUTION-----------
-
-        if (player1Id != player2Id) {
-
-            Database db = new Database();
-            db.createNewGame(newGame);
-            db.closeDb();
-        } else {
-
-            msg = "Nem lehet ugyan az a két játékos";
-
-        }
-
-        model.addAttribute("msg", msg);
-
-        return "admin.html";
+        return targetPage;
     }
 
     @GetMapping("/showgames")

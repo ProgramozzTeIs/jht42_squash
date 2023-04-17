@@ -28,7 +28,7 @@
 	</form>
 		
 
-	<form action="\addgame" method="post">
+	<form action="/addgame" method="post">
 		
 		<p>Játékos 1</p>
 		<select name="player1Id">
@@ -52,13 +52,15 @@
 		<input type="number" name="scoreplayer2">
 			
 		<p>Dátum</p>
-		<input type="date" name="gamedate">
-			
+		<input type="datetime-local" name="gamedate">
+		
+		<input type="hidden" name="loggedin_adminid" th:value="${user.id}" />
+		
 		<input type="submit" value="Játék létrehozása" />
 		
 	</form>
 	
-	<form action="\showgames" method="get">
+	<form action="/showgames" method="get">
 	
  		<input type="hidden" name="uid" th:value="${user.id}" />
 		
