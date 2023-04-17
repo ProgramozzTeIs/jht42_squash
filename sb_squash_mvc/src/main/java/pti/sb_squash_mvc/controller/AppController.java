@@ -4,16 +4,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import javax.management.relation.Role;
-
-import javax.xml.crypto.Data;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import pti.sb_squash_mvc.db.Database;
 import pti.sb_squash_mvc.model.Court;
 import pti.sb_squash_mvc.model.Game;
@@ -271,7 +268,6 @@ public class AppController {
 	        newGame.setScorePlayer1(sP1);
 	        newGame.setScorePlayer2(sP2);
 	        
-//	        System.out.println(gamedate);
 	        gamedate += ":00";
 	        newGame.setGamedate( LocalDateTime.parse(gamedate) );
 	
@@ -312,22 +308,30 @@ public class AppController {
             Model model,
             @RequestParam(name = "uid") int uId
     ) {
-        System.out.println(uId);
-        System.out.println("grehbrerhghd");
         Database db = new Database();
-
-        List<Game> gameList = db.getAllGames();
-        List<User> userList = db.getAllUsers();
-        List<Court> courtList = db.getAllCourts();
-
         User user = db.getUserById(uId);
-        model.addAttribute("user", user);
+        String targetPage = "index.html";
+        
+        /** LOGGED IN? */
+        if(user.isLoggedin() == true) {
+	        List<Game> gameList = db.getAllGames();
+	        List<User> userList = db.getAllUsers();
+	        List<Court> courtList = db.getAllCourts();
+	
+	        
+	        model.addAttribute("user", user);
+	
+	        model.addAttribute("userList", userList);
+	        model.addAttribute("courtList", courtList);
+	        model.addAttribute("gameList", gameList);
+        }
+        else {
+        	
+        	targetPage = "login.html";
+        }
 
-        model.addAttribute("userList", userList);
-        model.addAttribute("courtList", courtList);
-        model.addAttribute("gameList", gameList);
-
-        return "index.html";
+        
+        return targetPage;
     }
 
     @PostMapping("/adduser")

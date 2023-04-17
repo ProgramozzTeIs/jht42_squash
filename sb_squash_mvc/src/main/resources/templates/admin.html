@@ -60,14 +60,15 @@
 		
 	</form>
 	
+	<br/>
+	<p>Irány az összes mérkőzés oldala</p>
 	<form action="/showgames" method="get">
 	
  		<input type="hidden" name="uid" th:value="${user.id}" />
-		
-	<a href="/showgames">link a főoldalra</a>
-	
+		<input type="submit" value="Összes mérkőzés" />
 	</form>
 	
+	<br/>
 	
 	<p> Új felhasználó :"</p>
 	<form action="/adduser" method="post">
