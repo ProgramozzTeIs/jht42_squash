@@ -321,6 +321,8 @@ public class AppController {
 
             newUser.setName(name);
             newUser.setPwd(s);
+            newUser.setRole(Roles.PLAYER);
+            newUser.setNewuser(true);
             db.addUser(newUser);
             msg = "Add new user";
 
